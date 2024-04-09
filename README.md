@@ -22,7 +22,7 @@ STAGING_DIR=$HOME/.tbox make 3rd-party modules RELEASE=1
 cd -
 ```
 
-### 步骤二：构建 uart-to-mqtt 自身
+### 步骤二：构建 protocal-adapter 自身
 ```
 git clone https://gitee.com/cpp-master/protocal-adapter.git
 cd protocal-adapter/src;

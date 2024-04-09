@@ -36,7 +36,7 @@ bool TcpServer::onInit(const tbox::Json &js) {
     LogDbg("tcp_server bind:%s, threshold:%d", bind.c_str(), threshold);
 
     if (!tcp_.initialize(tbox::network::SockAddr::FromString(bind), 1)) {
-      LogErr("init tcp fail");
+      LogErr("init tcp_server fail");
       return false;
     }
     tcp_.setConnectedCallback(std::bind(&TcpServer::onTcpConnected, this, _1));
