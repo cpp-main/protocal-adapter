@@ -24,12 +24,16 @@ void TcpServer::onFillDefaultConfig(tbox::Json &js) {
 
 bool TcpServer::onInit(const tbox::Json &js) {
   tbox::util::json::GetField(js, "enable", is_enable_);
+
   if (is_enable_) {
+    LogInfo("tcp server enabled");
+
     std::string bind;
     int threshold = 0;
 
     tbox::util::json::GetField(js, "bind", bind);
     tbox::util::json::GetField(js, "threshold", threshold);
+    LogDbg("tcp_server bind:%s, threshold:%d", bind.c_str(), threshold);
 
     if (!tcp_.initialize(tbox::network::SockAddr::FromString(bind), 1)) {
       LogErr("init tcp fail");
@@ -38,7 +42,6 @@ bool TcpServer::onInit(const tbox::Json &js) {
     tcp_.setConnectedCallback(std::bind(&TcpServer::onTcpConnected, this, _1));
     tcp_.setDisconnectedCallback(std::bind(&TcpServer::onTcpDisconnected, this, _1));
     tcp_.setReceiveCallback(std::bind(&TcpServer::onTcpRecv, this, _1, _2), threshold);
-    LogInfo("tcp server enabled");
   }
   return true;
 }

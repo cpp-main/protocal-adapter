@@ -24,20 +24,23 @@ void Udp::onFillDefaultConfig(tbox::Json &js) {
 
 bool Udp::onInit(const tbox::Json &js) {
   tbox::util::json::GetField(js, "enable", is_enable_);
+
   if (is_enable_) {
+    LogInfo("udp enabled");
+
     std::string bind, connect;
     if (tbox::util::json::GetField(js, "connect", connect)) {
       udp_.connect(tbox::network::SockAddr::FromString(connect));
+      LogDbg("udp connect: %s", connect.c_str());
       is_connect_ = true;
     }
 
     if (tbox::util::json::GetField(js, "bind", bind)) {
       udp_.bind(tbox::network::SockAddr::FromString(bind));
       udp_.setRecvCallback(std::bind(&Udp::onRecv, this, _1, _2, _3));
+      LogDbg("udp bind: %s", bind.c_str());
       is_bind_ = true;
     }
-
-    LogInfo("udp enabled");
   }
   return true;
 }

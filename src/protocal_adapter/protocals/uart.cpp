@@ -27,6 +27,8 @@ bool Uart::onInit(const tbox::Json &js) {
   tbox::util::json::GetField(js, "enable", is_enable_);
 
   if (is_enable_) {
+    LogInfo("uart enabled");
+
     std::string dev;
     std::string mode;
     int threshold = 0;
@@ -34,13 +36,13 @@ bool Uart::onInit(const tbox::Json &js) {
     tbox::util::json::GetField(js, "dev", dev);
     tbox::util::json::GetField(js, "mode", mode);
     tbox::util::json::GetField(js, "threshold", threshold);
+    LogDbg("uart dev:%s, mode:%s, threshold:%d", dev.c_str(), mode.c_str(), threshold);
 
     if (!uart_.initialize(dev, mode)) {
       LogErr("init mqtt fail");
       return false;
     }
     uart_.setReceiveCallback(std::bind(&Uart::onUartRecv, this, _1), threshold);
-    LogInfo("uart enabled");
   }
   return true;
 }

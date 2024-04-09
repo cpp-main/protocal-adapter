@@ -25,19 +25,22 @@ void TcpClient::onFillDefaultConfig(tbox::Json &js) {
 
 bool TcpClient::onInit(const tbox::Json &js) {
   tbox::util::json::GetField(js, "enable", is_enable_);
+
   if (is_enable_) {
+    LogInfo("tcp client enabled");
+
     std::string addr;
     int threshold = 0;
 
     tbox::util::json::GetField(js, "connect", addr);
     tbox::util::json::GetField(js, "threshold", threshold);
+    LogDbg("tcp_client connect:%s, threshold:%d", addr.c_str(), threshold);
 
     if (!tcp_.initialize(tbox::network::SockAddr::FromString(addr))) {
       LogErr("init tcp fail");
       return false;
     }
     tcp_.setReceiveCallback(std::bind(&TcpClient::onTcpRecv, this, _1), threshold);
-    LogInfo("tcp client enabled");
   }
   return true;
 }
