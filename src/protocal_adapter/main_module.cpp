@@ -7,6 +7,12 @@
 #include <tbox/terminal/terminal_nodes.h>
 #include <tbox/terminal/helper.h>
 
+#include "protocals/mqtt.h"
+#include "protocals/uart.h"
+#include "protocals/tcp_client.h"
+#include "protocals/tcp_server.h"
+#include "protocals/udp.h"
+
 namespace hevake {
 namespace protocal_adapter {
 
@@ -20,6 +26,18 @@ MainModule::MainModule(tbox::main::Context &ctx)
   auto uart = new Uart(ctx, *this);
   add(uart);
   protocals_.push_back(uart);
+
+  auto tcp_server = new TcpServer(ctx, *this);
+  add(tcp_server);
+  protocals_.push_back(tcp_server);
+
+  auto tcp_client = new TcpClient(ctx, *this);
+  add(tcp_client);
+  protocals_.push_back(tcp_client);
+
+  auto udp = new Udp(ctx, *this);
+  add(udp);
+  protocals_.push_back(udp);
 }
 
 void MainModule::onFillDefaultConfig(tbox::Json &js) {

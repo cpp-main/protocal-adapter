@@ -24,12 +24,13 @@ void Uart::onFillDefaultConfig(tbox::Json &js) {
 }
 
 bool Uart::onInit(const tbox::Json &js) {
-  std::string dev;
-  std::string mode;
-  int threshold = 0;
-
   tbox::util::json::GetField(js, "enable", is_enable_);
+
   if (is_enable_) {
+    std::string dev;
+    std::string mode;
+    int threshold = 0;
+
     tbox::util::json::GetField(js, "dev", dev);
     tbox::util::json::GetField(js, "mode", mode);
     tbox::util::json::GetField(js, "threshold", threshold);

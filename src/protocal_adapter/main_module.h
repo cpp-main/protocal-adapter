@@ -2,8 +2,7 @@
 #define UART_TO_MQTT_H
 
 #include <tbox/main/module.h>
-#include "protocals/mqtt.h"
-#include "protocals/uart.h"
+#include "protocal.h"
 
 namespace hevake {
 namespace protocal_adapter {
@@ -25,8 +24,6 @@ class MainModule : public tbox::main::Module
 
  private:
   std::vector<Protocal*> protocals_;
-  Mqtt *mqtt_; 
-  Uart *uart_; 
   bool is_enable_log_ = false;
 };
 

@@ -7,7 +7,7 @@ OBJECTS = apps.o
 
 include protocal_adapter/app.mk
 
-CXXFLAGS := -I$(HOME)/.tbox/include/ -DLOG_MODULE_ID='"adapter"'
+CXXFLAGS := -I$(HOME)/.tbox/include/ -DLOG_MODULE_ID='"protocal_adapter"'
 LDFLAGS := -L$(HOME)/.tbox/lib/
 LIBS := \
 	-ltbox_main \
