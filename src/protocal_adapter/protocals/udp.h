@@ -32,9 +32,8 @@ class Udp : public tbox::main::Module
  private:
   Parent &parent_;
   tbox::network::UdpSocket udp_;
-  bool is_enable_ = false;
+  tbox::network::SockAddr send_addr_;
   bool is_bind_ = false;
-  bool is_connect_ = false;
 };
 
 }
