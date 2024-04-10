@@ -2,13 +2,13 @@
 
 CXX = g++
 
-TARGET = adapter
+EXE = adapter
 OBJECTS = apps.o
+PROTOCAL_ADAPTER_LIB = ./protocal_adapter/libadapter.a
 
-include protocal_adapter/app.mk
-
-CXXFLAGS := -I$(HOME)/.tbox/include/ -DLOG_MODULE_ID='"protocal_adapter"'
+CXXFLAGS := -I$(HOME)/.tbox/include/
 LDFLAGS := -L$(HOME)/.tbox/lib/
+
 LIBS := \
 	-ltbox_main \
 	-ltbox_terminal \
@@ -23,11 +23,17 @@ LIBS := \
 	-lpthread \
 	-ldl
 
-$(TARGET) : $(OBJECTS)
+all: $(EXE)
+
+$(PROTOCAL_ADAPTER_LIB):
+	make -C protocal_adapter libadapter.a
+
+$(EXE) : $(OBJECTS) $(PROTOCAL_ADAPTER_LIB)
 	$(CXX) -o $@ $^ $(LDFLAGS) $(LIBS)
 
 clean: 
 	rm -f $(OBJECTS)
 
 distclean: clean
-	rm -r $(TARGET)
+	make -C protocal_adapter distclean
+	rm -f $(EXE)

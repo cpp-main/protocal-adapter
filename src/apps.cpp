@@ -1,11 +1,11 @@
 #include <tbox/main/module.h>
-#include "protocal_adapter/main_module.h"
+#include "protocal_adapter/create.h"
 
 namespace tbox {
 namespace main {
 
 void RegisterApps(Module &apps, Context &ctx) {
-  apps.add(new hevake::protocal_adapter::MainModule(ctx));
+  apps.add(hevake::protocal_adapter::Create(ctx));
 }
 
 std::string GetAppDescribe() {
@@ -14,7 +14,7 @@ std::string GetAppDescribe() {
 
 void GetAppVersion(int &major, int &minor, int &rev, int &build) {
   major = 1;
-  minor = 0;
+  minor = 1;
   rev = 2;
   build = 6;
 }
