@@ -1,2 +1,3 @@
 *.o
 adapter
+libtbox_plugin_adapter.so*

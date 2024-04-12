@@ -18,21 +18,23 @@ Udp::Udp(tbox::main::Context &ctx, Parent &parent)
 //! 默认参数
 void Udp::onFillDefaultConfig(tbox::Json &js) {
   js["enable"] = false;
-  js["connect"] = "0.0.0.0:23456";
-  js["bind"] = "0.0.0.0:23456";
+  js["send"] = "127.0.0.1:6668";
+  js["bind"] = "127.0.0.1:6669";
 }
 
 bool Udp::onInit(const tbox::Json &js) {
-  tbox::util::json::GetField(js, "enable", is_enable_);
+  bool is_enable = false;
+  tbox::util::json::GetField(js, "enable", is_enable);
 
-  if (is_enable_) {
+  if (is_enable) {
     LogInfo("udp enabled");
 
-    std::string bind, connect;
-    if (tbox::util::json::GetField(js, "connect", connect)) {
-      udp_.connect(tbox::network::SockAddr::FromString(connect));
-      LogDbg("udp connect: %s", connect.c_str());
-      is_connect_ = true;
+    std::string bind, send;
+    if (tbox::util::json::GetField(js, "send", send)) {
+      send_addr_ = tbox::network::SockAddr::FromString(send);
+      //!NOTE: 这里采用记录发送地址而不是使用 udp_.connect() 设置目标地址，
+      //!      是因为 connect()与bind()不能同时使用，否则bind()会失效，导致收不到数据。
+      LogDbg("udp send: %s", send.c_str());
     }
 
     if (tbox::util::json::GetField(js, "bind", bind)) {
@@ -58,8 +60,8 @@ void Udp::onStop() {
 }
 
 void Udp::send(const void *data_ptr, size_t data_size) {
-  if (is_connect_)
-    udp_.send(data_ptr, data_size);
+  if (send_addr_.type() != tbox::network::SockAddr::Type::kNone)
+    udp_.send(data_ptr, data_size, send_addr_);
 }
 
 void Udp::onRecv(const void *data_ptr, size_t data_size, const tbox::network::SockAddr &) {
