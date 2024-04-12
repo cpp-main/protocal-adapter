@@ -6,55 +6,55 @@
 
 [[English]](README.md)
 
-## 介绍
-基于 [cpp-tbox](https://gitee.com/cpp-master/cpp-tbox) 框架实现的多协议适配器
+## What
+Multi-protocol adapter implemented based on the [cpp-tbox](https://github.com/cpp-main/cpp-tbox) framework.
 
-## 功能
+## Feature
 
-- 支持UART, MQTT, TCP, UDP协议转换
+- Support Uart, MQTT, TCP as server, TCP as client, UDP
 
-## 构建
-### 步骤一：构建 [cpp-tbox](https://gitee.com/cpp-master/cpp-tbox) 项目  
+## Build
+### Step 1：build [cpp-tbox](https://github.com/cpp-main/cpp-tbox) first  
 ```
-git clone https://gitee.com/cpp-master/cpp-tbox.git
+git clone https://github.com/cpp-main/cpp-tbox.git
 cd cpp-tbox;
 STAGING_DIR=$HOME/.tbox make 3rd-party modules RELEASE=1
 cd -
 ```
 
-### 步骤二：构建 protocal-adapter 自身
+### Step 2：build protocal-adapter
 ```
-git clone https://gitee.com/cpp-master/protocal-adapter.git
+git clone https://github.com/cpp-main/protocal-adapter.git
 cd protocal-adapter/src;
 make
 ```
-构建完成之后，在 src 目录下会生成：adapter 可执行文件。
+After build, we will see executable file `adapter` at src/.
 
-## 运行
-执行命令：
+## Run
+Cmd:
 ```
 ./adapter ../config/default.conf
 ```
-提示：  
+Note:
 
-- 如果没有权限打开串口文件的问题，则加 sudo 再执行。
-- 使用者可以根据需要修改 config/default.conf
+- If there is a problem with not having permission to open the serial port file, add sudo and execute again.
+- You can modify config/default.conf as needed.
 
-## 配置文件
-详见 config/default.conf，或阅读源码。
+## Config
+See config/default.conf for details, or read the source code.
 
-## 反馈途径
-- Issue: 任何问题都欢迎在issue里交流
-- 微信: hevake\_lee
-- QQ群: 738084942 (cpp-tbox 技术交流)
+## Feedback
+- Issue: Any questions are welcome to communicate in issue
+- WeChat: hevake_lee
+- QQ group: 738084942 (cpp-tbox 技术交流)
 
-## 鼓励我们
-如果你觉得很有用，请您给我更多的鼓励。  
-你可以做这些：
+## Encourage us
+If you find it useful, please give me more encouragement.
+You can do these:
 
-- 关注 [cpp-tbox](https://gitee.com/cpp-master/cpp-tbox) 开源项目；
-- 给它点亮三连： Star, Watch, Fork；
-- 向身边的同事与伙伴推荐，在技术论坛向您的读者推荐；
-- 加入上面的QQ群、加我微信进入微信群；
-- 积极反馈问题，提出建议；
-- 参与项目的开发，贡献您的力量。
+- Follow [cpp-tbox](https://github.com/cpp-main/cpp-tbox) open source project;
+- Light up three combos for it: Star, Watch, Fork;
+- Recommend to colleagues and partners around you, and recommend to your readers in technical forums;
+- Join the above QQ group, add me on WeChat to enter the WeChat group;
+- Positive feedback on issues and suggestions;
+- Participate in the development of the project and contribute your strength.
