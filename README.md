@@ -4,7 +4,7 @@
 [![Language](https://img.shields.io/badge/language-c++11-red.svg)](https://en.cppreference.com/)
 [![Platform](https://img.shields.io/badge/platform-linux-lightgrey.svg)](https://img.shields.io/badge/platform-linux-lightgrey.svg)
 
-[[English]](README.md)
+[[中文]](README_CN.md)
 
 ## What
 Multi-protocol adapter implemented based on the [cpp-tbox](https://github.com/cpp-main/cpp-tbox) framework.
