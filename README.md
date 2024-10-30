@@ -33,7 +33,7 @@ After build, we will see executable file `adapter` at src/.
 ## Run
 Cmd:
 ```
-./adapter ../config/default.conf
+./adapter -c ../config/default.conf
 ```
 Note:
 

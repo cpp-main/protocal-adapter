@@ -3,7 +3,7 @@
 #include <tbox/base/log.h>
 #include <tbox/base/json.hpp>
 #include <tbox/util/json.h>
-#include <tbox/network/buffer.h>
+#include <tbox/util/buffer.h>
 
 namespace hevake {
 namespace protocal_adapter {

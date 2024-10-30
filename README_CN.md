@@ -33,7 +33,7 @@ make
 ## 运行
 执行命令：
 ```
-./adapter ../config/default.conf
+./adapter -c ../config/default.conf
 ```
 提示：  
 
