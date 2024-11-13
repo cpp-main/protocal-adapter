@@ -4,6 +4,9 @@
 #include <tbox/base/json.hpp>
 #include <tbox/util/json.h>
 
+#undef LOG_MODULE_ID
+#define LOG_MODULE_ID "pa.tcp_srv"
+
 namespace hevake {
 namespace protocal_adapter {
 

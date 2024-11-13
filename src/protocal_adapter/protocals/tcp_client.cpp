@@ -5,6 +5,9 @@
 #include <tbox/util/json.h>
 #include <tbox/network/buffer.h>
 
+#undef LOG_MODULE_ID
+#define LOG_MODULE_ID "pa.tcp_cli"
+
 namespace hevake {
 namespace protocal_adapter {
 
