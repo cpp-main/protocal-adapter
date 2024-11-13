@@ -17,7 +17,7 @@ OBJECTS = \
 	protocals/tcp_client.o \
 	protocals/tcp_server.o \
 
-CXXFLAGS := -I$(HOME)/.tbox/include/ -fPIC -DLOG_MODULE_ID='"pa"'
+CXXFLAGS := -I$(HOME)/.tbox/include/ -fPIC -DMODULE_ID='"pa"'
 LDFLAGS := -L$(HOME)/.tbox/lib/
 LIBS := \
 	-ltbox_main \
