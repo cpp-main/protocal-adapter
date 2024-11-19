@@ -16,7 +16,7 @@ void GetAppVersion(int &major, int &minor, int &rev, int &build) {
   major = 1;
   minor = 1;
   rev = 2;
-  build = 6;
+  build = 7;
 }
 
 }

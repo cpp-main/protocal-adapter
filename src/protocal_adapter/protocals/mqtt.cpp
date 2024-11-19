@@ -5,7 +5,7 @@
 #include <tbox/util/json.h>
 
 #undef LOG_MODULE_ID
-#define LOG_MODULE_ID "pa.uart"
+#define LOG_MODULE_ID "pa.mqtt"
 
 namespace hevake {
 namespace protocal_adapter {
