@@ -13,7 +13,7 @@ class MainModule : public tbox::main::Module
   explicit MainModule(tbox::main::Context &ctx);
 
  protected:
-  virtual void onFillDefaultConfig(tbox::Json &js) override;
+  virtual void onFillDefaultConfig(tbox::Json &js) const override;
   virtual bool onInit(const tbox::Json &js) override;
   virtual bool onStart() override;
   virtual void onStop() override;

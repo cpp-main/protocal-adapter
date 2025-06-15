@@ -19,7 +19,7 @@ Uart::Uart(tbox::main::Context &ctx, Parent &parent)
 { }
 
 //! 默认参数
-void Uart::onFillDefaultConfig(tbox::Json &js) {
+void Uart::onFillDefaultConfig(tbox::Json &js) const {
   js["enable"] = false;
   js["dev"] = "/dev/ttyS0";
   js["mode"] = "115200 8n1";

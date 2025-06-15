@@ -19,7 +19,7 @@ TcpServer::TcpServer(tbox::main::Context &ctx, Parent &parent)
 { }
 
 //! 默认参数
-void TcpServer::onFillDefaultConfig(tbox::Json &js) {
+void TcpServer::onFillDefaultConfig(tbox::Json &js) const {
   js["enable"] = false;
   js["bind"] = "0.0.0.0:12345";
   js["threshold"] = 1;

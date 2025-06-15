@@ -19,7 +19,7 @@ Udp::Udp(tbox::main::Context &ctx, Parent &parent)
 { }
 
 //! 默认参数
-void Udp::onFillDefaultConfig(tbox::Json &js) {
+void Udp::onFillDefaultConfig(tbox::Json &js) const {
   js["enable"] = false;
   js["send"] = "127.0.0.1:6668";
   js["bind"] = "127.0.0.1:6669";

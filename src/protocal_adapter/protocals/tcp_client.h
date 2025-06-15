@@ -17,7 +17,7 @@ class TcpClient : public tbox::main::Module
   explicit TcpClient(tbox::main::Context &ctx, Parent &parent);
 
  public:
-  virtual void onFillDefaultConfig(tbox::Json &js) override;
+  virtual void onFillDefaultConfig(tbox::Json &js) const override;
   virtual bool onInit(const tbox::Json &js) override;
   virtual bool onStart() override;
   virtual void onStop() override;

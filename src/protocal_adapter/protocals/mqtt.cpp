@@ -17,7 +17,7 @@ Mqtt::Mqtt(tbox::main::Context &ctx, Parent &parent)
 { }
 
 //! 默认参数
-void Mqtt::onFillDefaultConfig(tbox::Json &js) {
+void Mqtt::onFillDefaultConfig(tbox::Json &js) const {
   js["enable"] = false;
   js["domain"] = "127.0.0.1";
   js["port"] = 1883;

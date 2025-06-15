@@ -40,7 +40,7 @@ MainModule::MainModule(tbox::main::Context &ctx)
   protocals_.push_back(udp);
 }
 
-void MainModule::onFillDefaultConfig(tbox::Json &js) {
+void MainModule::onFillDefaultConfig(tbox::Json &js) const {
   js["is_enable_log"] = false;
 }
 
