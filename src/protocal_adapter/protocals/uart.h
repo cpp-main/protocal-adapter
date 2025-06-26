@@ -17,10 +17,12 @@ class Uart : public tbox::main::Module
   explicit Uart(tbox::main::Context &ctx, Parent &parent);
 
  public:
-  virtual void onFillDefaultConfig(tbox::Json &js) override;
+  virtual void onFillDefaultConfig(tbox::Json &js) const override;
   virtual bool onInit(const tbox::Json &js) override;
   virtual bool onStart() override;
   virtual void onStop() override;
+
+  virtual void toJson(tbox::Json &js) const override;
 
  public:
   virtual std::string type() const override { return "uart"; }

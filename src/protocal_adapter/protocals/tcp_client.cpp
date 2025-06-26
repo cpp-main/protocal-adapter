@@ -20,7 +20,7 @@ TcpClient::TcpClient(tbox::main::Context &ctx, Parent &parent)
 { }
 
 //! 默认参数
-void TcpClient::onFillDefaultConfig(tbox::Json &js) {
+void TcpClient::onFillDefaultConfig(tbox::Json &js) const {
   js["enable"] = false;
   js["connect"] = "0.0.0.0:12345";
   js["threshold"] = 1;
@@ -58,6 +58,11 @@ bool TcpClient::onStart() {
 void TcpClient::onStop() {
   if (is_enable_)
     tcp_.stop();
+}
+
+void TcpClient::toJson(tbox::Json &js) const {
+  tbox::main::Module::toJson(js);
+  js["is_enable"] = is_enable_;
 }
 
 void TcpClient::send(const void *data_ptr, size_t data_size) {

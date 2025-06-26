@@ -17,10 +17,12 @@ class Udp : public tbox::main::Module
   explicit Udp(tbox::main::Context &ctx, Parent &parent);
 
  public:
-  virtual void onFillDefaultConfig(tbox::Json &js) override;
+  virtual void onFillDefaultConfig(tbox::Json &js) const override;
   virtual bool onInit(const tbox::Json &js) override;
   virtual bool onStart() override;
   virtual void onStop() override;
+
+  virtual void toJson(tbox::Json &js) const override;
 
  public:
   virtual std::string type() const override { return "udp"; }
@@ -33,6 +35,7 @@ class Udp : public tbox::main::Module
   Parent &parent_;
   tbox::network::UdpSocket udp_;
   tbox::network::SockAddr send_addr_;
+  bool is_enable_ = false;
   bool is_bind_ = false;
 };
 

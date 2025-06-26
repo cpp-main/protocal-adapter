@@ -17,7 +17,7 @@ namespace hevake {
 namespace protocal_adapter {
 
 MainModule::MainModule(tbox::main::Context &ctx)
- : tbox::main::Module("protocal_adapter", ctx)
+ : tbox::main::Module("pa", ctx)
 {
   auto mqtt = new Mqtt(ctx, *this);
   add(mqtt);
@@ -40,7 +40,7 @@ MainModule::MainModule(tbox::main::Context &ctx)
   protocals_.push_back(udp);
 }
 
-void MainModule::onFillDefaultConfig(tbox::Json &js) {
+void MainModule::onFillDefaultConfig(tbox::Json &js) const {
   js["is_enable_log"] = false;
 }
 
@@ -57,6 +57,11 @@ bool MainModule::onStart() {
 
 void MainModule::onStop() {
   LogInfo("stoped");
+}
+
+void MainModule::toJson(tbox::Json &js) const {
+  tbox::main::Module::toJson(js);
+  js["is_enable_log"] = is_enable_log_;
 }
 
 void MainModule::onRecv(const std::string &from_who, const void *data_ptr, size_t data_size) {
@@ -76,7 +81,7 @@ void MainModule::initShell() {
   auto shell = ctx().terminal();
   auto dir_node = shell->createDirNode();
 
-  shell->mountNode(shell->rootNode(), dir_node, "protocal_adapter");
+  shell->mountNode(shell->rootNode(), dir_node, name());
   tbox::terminal::AddFuncNode(*shell, dir_node, "is_enable_log", is_enable_log_);
 }
 

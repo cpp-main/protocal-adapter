@@ -17,7 +17,7 @@ Mqtt::Mqtt(tbox::main::Context &ctx, Parent &parent)
 { }
 
 //! 默认参数
-void Mqtt::onFillDefaultConfig(tbox::Json &js) {
+void Mqtt::onFillDefaultConfig(tbox::Json &js) const {
   js["enable"] = false;
   js["domain"] = "127.0.0.1";
   js["port"] = 1883;
@@ -34,7 +34,6 @@ bool Mqtt::onInit(const tbox::Json &js)
 
     std::string broker_domain;
     int broker_port;
-    std::string recv_topic;
     tbox::mqtt::Client::Config conf;
 
     tbox::util::json::GetField(js, "domain", broker_domain);
@@ -68,15 +67,15 @@ bool Mqtt::onInit(const tbox::Json &js)
     }
 
     tbox::util::json::GetField(js, "send_topic", send_topic_);
-    tbox::util::json::GetField(js, "recv_topic", recv_topic);
-    LogDbg("send_topic:%s, recv_topic:%s", send_topic_.c_str(), recv_topic.c_str());
+    tbox::util::json::GetField(js, "recv_topic", recv_topic_);
+    LogDbg("send_topic:%s, recv_topic:%s", send_topic_.c_str(), recv_topic_.c_str());
 
     conf.base.broker.domain = broker_domain;
     conf.base.broker.port = broker_port;
 
     tbox::mqtt::Client::Callbacks cbs;
 
-    cbs.connected = [this, recv_topic] { mqtt_.subscribe(recv_topic); };
+    cbs.connected = [this] { mqtt_.subscribe(recv_topic_); };
 
     cbs.message_recv = [this] (int, const std::string &, const void *payload_ptr, int payload_len, int, bool) {
       parent_.onRecv(type(), payload_ptr, payload_len);
@@ -104,6 +103,13 @@ void Mqtt::onStop() {
 void Mqtt::onCleanup() {
   if (is_enable_)
     mqtt_.cleanup();
+}
+
+void Mqtt::toJson(tbox::Json &js) const {
+  tbox::main::Module::toJson(js);
+  js["is_enable"] = is_enable_;
+  js["send_topic"] = send_topic_;
+  js["recv_topic"] = recv_topic_;
 }
 
 void Mqtt::send(const void *data_ptr, size_t data_size) {

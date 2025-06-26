@@ -19,7 +19,7 @@ TcpServer::TcpServer(tbox::main::Context &ctx, Parent &parent)
 { }
 
 //! 默认参数
-void TcpServer::onFillDefaultConfig(tbox::Json &js) {
+void TcpServer::onFillDefaultConfig(tbox::Json &js) const {
   js["enable"] = false;
   js["bind"] = "0.0.0.0:12345";
   js["threshold"] = 1;
@@ -59,6 +59,11 @@ bool TcpServer::onStart() {
 void TcpServer::onStop() {
   if (is_enable_)
     tcp_.stop();
+}
+
+void TcpServer::toJson(tbox::Json &js) const {
+  tbox::main::Module::toJson(js);
+  js["is_enable"] = is_enable_;
 }
 
 void TcpServer::send(const void *data_ptr, size_t data_size) {

@@ -19,17 +19,16 @@ Udp::Udp(tbox::main::Context &ctx, Parent &parent)
 { }
 
 //! 默认参数
-void Udp::onFillDefaultConfig(tbox::Json &js) {
+void Udp::onFillDefaultConfig(tbox::Json &js) const {
   js["enable"] = false;
   js["send"] = "127.0.0.1:6668";
   js["bind"] = "127.0.0.1:6669";
 }
 
 bool Udp::onInit(const tbox::Json &js) {
-  bool is_enable = false;
-  tbox::util::json::GetField(js, "enable", is_enable);
+  tbox::util::json::GetField(js, "enable", is_enable_);
 
-  if (is_enable) {
+  if (is_enable_) {
     LogInfo("udp enabled");
 
     std::string bind, send;
@@ -60,6 +59,13 @@ bool Udp::onStart() {
 void Udp::onStop() {
   if (is_bind_)
     udp_.disable();
+}
+
+void Udp::toJson(tbox::Json &js) const {
+  tbox::main::Module::toJson(js);
+  js["is_enable"] = is_enable_;
+  js["is_bind"] = is_bind_;
+  js["send_addr"] = send_addr_.toString();
 }
 
 void Udp::send(const void *data_ptr, size_t data_size) {

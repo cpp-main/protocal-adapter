@@ -17,11 +17,13 @@ class Mqtt : public tbox::main::Module
   explicit Mqtt(tbox::main::Context &ctx, Parent &parent);
 
  public:
-  virtual void onFillDefaultConfig(tbox::Json &js) override;
+  virtual void onFillDefaultConfig(tbox::Json &js) const override;
   virtual bool onInit(const tbox::Json &js) override;
   virtual bool onStart() override;
   virtual void onStop() override;
   virtual void onCleanup() override;
+
+  virtual void toJson(tbox::Json &js) const override;
 
  public:
   virtual std::string type() const { return "mqtt"; }
@@ -32,6 +34,7 @@ class Mqtt : public tbox::main::Module
   tbox::mqtt::Client mqtt_;
   bool is_enable_ = false;
   std::string send_topic_;
+  std::string recv_topic_;
 };
 
 }
